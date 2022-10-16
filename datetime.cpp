@@ -56,12 +56,13 @@ istream &operator >>(istream &in, Date_Time &DT){
 	return in;
 }
 
-void dbInput(ifstream &fin, Date_Time &DT){
+ifstream& dbInput(ifstream &fin, Date_Time &DT){
 	fin>>DT.Day;
 	fin>>DT.Month;
 	fin>>DT.Year;
 	fin>>DT.Hour;
 	fin>>DT.Minute;
+	return fin;
 }
 
 ostream &operator <<(ostream &out, const Date_Time &DT){

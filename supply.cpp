@@ -73,7 +73,7 @@ istream &operator >>(istream &in, Supply &S){
 	return in;
 }
 
-void dbInput(ifstream &fin, Supply &S){
+std::ifstream& dbInput(ifstream &fin, Supply &S){
 	int c;
 	getline(fin, S.code); cout<<1<<endl	;
 	getline(fin, S.name); cout<<2;
@@ -84,6 +84,7 @@ void dbInput(ifstream &fin, Supply &S){
 	fin>>S.quantity; cout<<11;
 	fin>>S.unit_price; cout<<12;
 	S.total = S.quantity * S.unit_price;
+	return fin;
 }
 
 ostream &operator <<(ostream &out, const Supply &S){

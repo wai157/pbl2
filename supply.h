@@ -25,7 +25,7 @@ class Supply{
 		bool operator !=(Supply S);
 		bool isValid();
 		friend std::istream &operator >>(std::istream &in, Supply &S);
-		friend void dbInput(std::ifstream &fin, Supply &S);
+		friend std::ifstream& dbInput(std::ifstream &fin, Supply &S);
 		friend std::ostream &operator <<(std::ostream &out, const Supply &S);
 		friend void dbOutput(std::ofstream &fout, const Supply &S);
 		friend void codeSearch(Supply* &head, string code);
