@@ -75,7 +75,7 @@ istream &operator >>(istream &in, Supply &S){
 
 void dbInput(ifstream &fin, Supply &S){
 	int c;
-	getline(fin, S.code); cout<<S.code<<endl	;
+	getline(fin, S.code); cout<<1<<endl	;
 	getline(fin, S.name); cout<<2;
 	getline(fin, S.type); cout<<3;
 	getline(fin, S.unit); cout<<4;
