@@ -1,70 +1,56 @@
 #include <bits/stdc++.h>
-#include "supply.cpp"
+#include "supList.cpp"
 using namespace std;
 
-Supply* Head=NULL;
+supList sL;
 int cnt;
 
 void option1(){
-	int n,c;
-	cout<<"Nhap so luong vat tu muon nhap: "; cin>>n;
 	Supply S;
-	while((c=getchar())!='\n' && c!=EOF);
-	for(int i=0;i<n;i++){
-		cout<<"Vat tu thu "<<i+1<<":\n";
-		cin>>S;
-		insert(Head, S);
-		cnt++;
-	}
+	cout<<"Moi nhap thong tin vat tu:\n"; cin>>S;
+	if(S.isValid() && sL.Search(S)==-1) sL.insertTail(S);
+	else 
+	cnt++;
 }
 
 void option2(){
-	Supply* Temp = Head;
-	int i=0;
-	while(Temp!=NULL){
-		cout<<"Vat tu thu "<<i+1<<":\n";
-		cout<<*Temp;
-		Temp = Temp->next;
-		i++;
-	}
+	sL.show();
 }
 
 void option3(){
-	string code;
-	cout<<"Nhap ma vat tu can bo sung: "; getline(cin, code);
-	Supply* Temp = Head;
-	codeSearch(Temp, code);
-	if(Temp!=NULL){
-		int qty;
-		cout<<"Nhap so luong can bo sung: "; cin>>qty;
-		*Temp = *Temp + qty;
-	} else cout<<"Khong tim thay vat tu can bo sung!\n";
+	int ch1=0, ch2=0;
+	cout<<"Chon thuoc tinh sap xep\n";
+	cout<<"(1: ma vat tu\n2: ten vat tu\n3: loai vat tu\n";
+	cout<<"4: don vi tinh\n5: ngay nhap hang\n6: nha san xuat\n";
+	cout<<"7: so luong\n8: don gia\n9: thanh tien): "; cin>>ch1;
+	cout<<"Chon thu tu sap xep\n";
+	cout<<"(1: tang dan\n2: giam dan): "; cin>>ch2;
+	sL.Sort(ch2, ch1);
 }
+
+void option5(){
+}
+
 int main(){
 	int control1=-1;
 	char control2='y';
 	ifstream dbin;
 	dbin.open("database.txt", ifstream::in);
-	dbin>>cnt;
-	Supply S;
-	for(int i=0;i<cnt;i++){
-		dbInput(dbin, S);
-		insert(Head, S);
-	}
+	dbin>>sL;
 	dbin.close();
 	while(true){
 		system("cls");
 		cout <<"---------------Menu---------------"<<endl;
 		cout <<"1. Nhap vat tu."<<endl;
-		cout <<"2. Xuat danh sach vat tu."<<endl;
-		cout <<"3. Bo sung vat tu."<<endl;
-		cout <<"4. Giam bot vat tu."<<endl;
-		cout <<"5. Sap xep danh sach vat tu."<<endl;
-		cout <<"6. Xoa vat tu."<<endl;
+		cout <<"2. Hien thi danh sach vat tu."<<endl;
+		cout <<"3. Sap xep danh sach vat tu."<<endl;
+		cout <<"4. "<<endl;
+		cout <<"5. "<<endl;
+		cout <<"6. "<<endl;
 		cout <<"7. Ket thuc."<<endl;
 		reinput:
-		cout <<"Lua chon cua ban la: ";
-		scanf("%d", &control1);
+		cout <<"\nLua chon cua ban la: ";
+		cin>>control1;
 		int c;
 		while((c=getchar())!='\n' && c!=EOF);
 		cout <<"----------------------------------"<<endl;
@@ -81,6 +67,7 @@ int main(){
 			case 4:
 				break;
 			case 5:
+				option5();
 				break;
 			case 6:
 				break;
@@ -93,16 +80,12 @@ int main(){
 				goto reinput;
 		}
 		control1=-1;
-		cout<<"Thuc hien thanh cong!\nNhan phim bat ki de tiep tuc.\n";
+		cout<<"\nThuc hien thanh cong!\nNhan phim bat ki de tiep tuc.\n";
 	}
 	ketthuc:{
 		ofstream dbout;
 		dbout.open("database.txt", ofstream::out);
-		dbout<<cnt<<endl;
-		while(Head!=NULL){
-			dbOutput(dbout, *Head);
-			Head=Head->next;
-		}
+		dbout<<sL;
 		dbout.close();
 		cout<<"Chuong trinh da ket thuc!\n";
 	}
