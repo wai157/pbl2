@@ -2,7 +2,7 @@
 #include "supply.h"
 using namespace std;
 
-Supply::Supply(string c, string n, string t, string u, int YYYY, int MM, int DD, int H, int M, string p, int q, int u_p):DateTime(YYYY,MM,DD,H,M){
+Supply::Supply(string c, string n, string t, string u, int yyyy, int mm, int dd, string p, int q, int u_p):dt(yyyy,mm,dd){
 	this->code = c;
 	this->name = n;
 	this->type = t;
@@ -12,6 +12,16 @@ Supply::Supply(string c, string n, string t, string u, int YYYY, int MM, int DD,
 	this->unit_price = u_p;
 	this->prev = NULL;
 	this->next = NULL;
+}
+
+Supply::Supply(const Supply &S){
+	*this = S;
+	this->prev = NULL;
+	this->next = NULL;
+}
+
+string Supply::Code() const{
+	return this->code;
 }
 
 Supply Supply::operator +(int q){
@@ -33,7 +43,7 @@ Supply &Supply::operator =(const Supply &S){
 	this->name = S.name;
 	this->type = S.type;
 	this->unit = S.unit;
-	this->DateTime = S.DateTime;
+	this->dt = S.dt;
 	this->producer = S.producer;
 	this->quantity = S.quantity;
 	this->unit_price = S.unit_price;
@@ -42,18 +52,19 @@ Supply &Supply::operator =(const Supply &S){
 }
 
 bool Supply::operator ==(Supply S){
-	if(this->code==S.code && this->name==S.name && this->type==S.type && this->unit==S.unit && this->DateTime==S.DateTime && this->producer==S.producer && this->quantity==S.quantity && this->unit_price==S.unit_price)
+	if(this->code==S.code && this->name==S.name && this->type==S.type && this->unit==S.unit && this->dt==S.dt && this->producer==S.producer && this->quantity==S.quantity && this->unit_price==S.unit_price)
 		return 1;
 	return 0;
 }
 bool Supply::operator !=(Supply S){
-	if(this->code==S.code && this->name==S.name && this->type==S.type && this->unit==S.unit && this->DateTime==S.DateTime && this->producer==S.producer && this->quantity==S.quantity && this->unit_price==S.unit_price)
+	if(this->code==S.code && this->name==S.name && this->type==S.type && this->unit==S.unit && this->dt==S.dt && this->producer==S.producer && this->quantity==S.quantity && this->unit_price==S.unit_price)
 		return 0;
 	return 1;
 }
 
 bool Supply::isValid(){
-	return (this->DateTime.isValid() && this->quantity>0 && this->unit_price>0);
+	
+	return (this->dt.isValid() && this->quantity>0 && this->unit_price>0);
 }
 
 istream &operator >>(istream &in, Supply &S){
@@ -62,29 +73,13 @@ istream &operator >>(istream &in, Supply &S){
 	cout<<"\tNhap ten vat tu: "; getline(in, S.name);
 	cout<<"\tNhap loai vat tu: "; getline(in, S.type);
 	cout<<"\tNhap don vi tinh: "; getline(in, S.unit);
-	cout<<"\tNhap thoi gian nhap hang: "<<endl; in>>S.DateTime;
-	while((c=getchar())!='\n' && c!=EOF);;
 	cout<<"\tNhap nha san xuat: "; getline(in, S.producer);
-	cout<<"\tNhap so luong: "; in>>S.quantity;
-	while((c=getchar())!='\n' && c!=EOF);;
-	cout<<"\tNhap don gia: "; in>>S.unit_price;
-	while((c=getchar())!='\n' && c!=EOF);;
+	cout<<"\tNhap so luong: "; in>>S.quantity; in.ignore();
+	// while((c=getchar())!='\n' && c!=EOF);
+	cout<<"\tNhap don gia: "; in>>S.unit_price; in.ignore();
+	// while((c=getchar())!='\n' && c!=EOF);
 	S.total = S.quantity * S.unit_price;
 	return in;
-}
-
-std::ifstream& dbInput(ifstream &fin, Supply &S){
-	int c;
-	getline(fin, S.code); cout<<1<<endl	;
-	getline(fin, S.name); cout<<2;
-	getline(fin, S.type); cout<<3;
-	getline(fin, S.unit); cout<<4;
-	dbInput(fin, S.DateTime); cout<<9;
-	getline(fin, S.producer); cout<<10;
-	fin>>S.quantity; cout<<11;
-	fin>>S.unit_price; cout<<12;
-	S.total = S.quantity * S.unit_price;
-	return fin;
 }
 
 ostream &operator <<(ostream &out, const Supply &S){
@@ -92,7 +87,7 @@ ostream &operator <<(ostream &out, const Supply &S){
 	out<<"\tTen vat tu: "<<S.name<<endl;
 	out<<"\tLoai vat tu: "<<S.type<<endl;
 	out<<"\tDon vi tinh: "<<S.unit<<endl;
-	out<<"\tNgay nhap hang: "<<S.DateTime;
+	out<<"\tNgay nhap hang: "<<S.dt;
 	out<<"\tNha san xuat: "<<S.producer<<endl;
 	out<<"\tSo luong: "<<S.quantity<<endl;
 	out<<"\tDon gia: "<<S.unit_price<<endl;
@@ -100,28 +95,48 @@ ostream &operator <<(ostream &out, const Supply &S){
 	return out;
 }
 
-void dbOutput(ofstream &fout, const Supply &S){
-	fout<<S.code<<endl;
-	fout<<S.name<<endl;
-	fout<<S.type<<endl;
-	fout<<S.unit<<endl;
-	dbOutput(fout, S.DateTime);
-	fout<<S.producer<< endl;
-	fout<<S.quantity<< endl;
-	fout<<S.unit_price<<endl;
-}
-
-void insert(Supply* &head, Supply S){
-	Supply* newSupply = new Supply(S);
-	newSupply->next = head;
-	if(head!=NULL){
-		head->prev = newSupply;
+bool ascend(const Supply a, const Supply b, int k=1){
+	switch(k){
+		case 2:
+			return a.name<b.name;
+		case 3:
+			return a.type<b.type;
+		case 4:
+			return a.unit<b.unit;
+		case 5:
+			return a.dt<b.dt;
+		case 6:
+			return a.producer<b.producer;
+		case 7:
+			return a.quantity<b.quantity;
+		case 8:
+			return a.unit_price<b.unit_price;
+		case 9:
+			return a.total<b.total;
+		default:
+			return a.code<b.code;
 	}
-	head = newSupply;
 }
 
-void codeSearch(Supply* &head, string code){
-	while(head!=NULL && head->code!=code){
-		head = head->next;
+bool descend(const Supply a, const Supply b, int k=1){
+	switch(k){
+		case 2:
+			return a.name>b.name;
+		case 3:
+			return a.type>b.type;
+		case 4:
+			return a.unit>b.unit;
+		case 5:
+			return a.dt>b.dt;
+		case 6:
+			return a.producer>b.producer;
+		case 7:
+			return a.quantity>b.quantity;
+		case 8:
+			return a.unit_price>b.unit_price;
+		case 9:
+			return a.total>b.total;
+		default:
+			return a.code>b.code;
 	}
 }
