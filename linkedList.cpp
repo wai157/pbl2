@@ -14,6 +14,16 @@ linkedList<T>::~linkedList(){
 }
 
 template<typename T>
+bool linkedList<T>::isEmpty() const{
+    return (this->Head==NULL);
+}
+
+template<typename T>
+int linkedList<T>::numOfNode() const{
+    return this->n;
+}
+
+template<typename T>
 void linkedList<T>::insertHead(const T &data){
     this->n++;
     node<T> *newNode = new node<T>(data);
@@ -68,7 +78,26 @@ void linkedList<T>::del(node<T> *delNode){
 }
 
 template<typename T>
-int partition(node<T> *L, int l, int h, bool compFunc(T, T, int), int k){
+void linkedList<T>::Sort(int order, int att){
+    node<T> *tmpArr = new node<T>[this->n];
+    int k=0;
+    node<T> *tmp = this->Head;
+    while(tmp!=NULL){
+        tmpArr[k++] = *tmp;
+        tmp = tmp->next;
+    }
+    if(order%2==1) qSort(tmpArr, 0, this->n-1, ascend, att);
+    else qSort(tmpArr, 0, this->n-1, descend, att);
+    tmp = this->Head;
+    k=0;
+    while(tmp!=NULL){
+        *tmp = tmpArr[k++];
+        tmp = tmp->next;
+    }
+}
+
+template<typename T>
+int partition(node<T> *L, int l, int h, bool compFunc(const T&,const T&, const int&), int k){
     node<T> pivot = L[h];
 	int i=l-1;
 	for(int j=l;j<h;j++){
@@ -82,7 +111,7 @@ int partition(node<T> *L, int l, int h, bool compFunc(T, T, int), int k){
 }
 
 template<typename T>
-void qSort(node<T> *L, int l, int h, bool compFunc(T, T, int), int k){
+void qSort(node<T> *L, int l, int h, bool compFunc(const T&, const T&, const int&), int k){
     if(l<h){
 		int pi=partition(L,l,h,compFunc,k);
 		qSort(L,l,pi-1,compFunc,k);

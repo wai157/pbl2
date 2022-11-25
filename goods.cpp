@@ -2,7 +2,7 @@
 #include "goods.h"
 using namespace std;
 
-goods::goods(string c, string n, string t, string u, int yyyy, int mm, int dd, string p, int q, int u_p):dt(yyyy,mm,dd){
+goods::goods(int yyyy, int mm, int dd, string c, string n, string t, string u, string p, int q, int u_p):dt(yyyy,mm,dd){
 	this->code = c;
 	this->name = n;
 	this->type = t;
@@ -24,8 +24,45 @@ goods::goods(const goods &S){
 	this->total = S.total;
 }
 
+goods::goods(const string &str){
+	int k=0;
+	int ps[10]={0};
+	int pe[10]={0};
+	int i=1;
+	while(i<=9){
+		ps[i]=k;
+		k = str.find(',', k);
+		pe[i]=k;
+		k++;
+		i++;
+	}
+	this->code = str.substr(ps[1],pe[1]-ps[1]);
+	this->name = str.substr(ps[2],pe[2]-ps[2]);
+	this->type = str.substr(ps[3],pe[3]-ps[3]);
+	this->unit = str.substr(ps[4],pe[4]-ps[4]);
+	this->dt = str.substr(ps[5],pe[5]-ps[5]);
+	this->producer = str.substr(ps[6],pe[6]-ps[6]);
+	this->quantity = stoi(str.substr(ps[7],pe[7]-ps[7]));
+	this->unit_price = stoi(str.substr(ps[8],pe[8]-ps[8]));
+	this->total = stoi(str.substr(ps[9],pe[9]-ps[9]));
+}
+
 goods::~goods(){
 	
+}
+
+bool goods::isValid() const{
+	return (this->code!="" && this->name!="" && 
+			this->type!="" && this->unit!="" && this->producer!="" &&
+			this->quantity>0 && this->unit_price>0);
+}
+
+date goods::DT() const{
+	return this->dt;
+}
+
+void goods::setDT(const date &dt){
+	this->dt = dt;
 }
 
 goods goods::operator +(int q){
@@ -66,42 +103,37 @@ bool goods::operator !=(goods S) const{
 	return 1;
 }
 
-bool goods::isValid() const{
-	return (this->quantity>0 && this->unit_price>0);
-}
-
-void goods::setDT(date dt){
-	this->dt = dt;
-}
-
 istream &operator >>(istream &in, goods &S){
-	cout<<"\tNhap ma vat tu: "; getline(in, S.code); 
-	cout<<"\tNhap ten vat tu: "; getline(in, S.name);
-	cout<<"\tNhap loai vat tu: "; getline(in, S.type);
+	cout<<"\tNhap ma hang hoa: "; getline(in, S.code); 
+	cout<<"\tNhap ten hang hoa: "; getline(in, S.name);
+	cout<<"\tNhap loai hang hoa: "; getline(in, S.type);
 	cout<<"\tNhap don vi tinh: "; getline(in, S.unit);
 	cout<<"\tNhap nha san xuat: "; getline(in, S.producer);
 	cout<<"\tNhap so luong: "; in>>S.quantity; in.ignore();
 	cout<<"\tNhap don gia: "; in>>S.unit_price; in.ignore();
 	S.total = S.quantity * S.unit_price;
+	
 	return in;
 }
 
 ostream &operator <<(ostream &out, const goods &S){
-	out<<"\tMa vat tu: "<<S.code<<endl;
-	out<<"\tTen vat tu: "<<S.name<<endl;
-	out<<"\tLoai vat tu: "<<S.type<<endl;
-	out<<"\tDon vi tinh: "<<S.unit<<endl;
-	out<<"\tNgay nhap hang: "<<S.dt;
-	out<<"\tNha san xuat: "<<S.producer<<endl;
-	out<<"\tSo luong: "<<S.quantity<<endl;
-	out<<"\tDon gia: "<<S.unit_price<<endl;
-	out<<"\tThanh tien: "<<S.total<<endl;
+	out<<setw(12)<<left<<S.code<<"| ";
+	out<<setw(23)<<left<<S.name<<"| ";
+	out<<setw(14)<<left<<S.type<<"| ";
+	out<<setw(19)<<left<<S.producer<<"| ";
+	out<<"     "<<S.dt<<"| ";
+	out<<setw(12)<<left<<S.unit<<"|";
+	out<<setw(9)<<right<<S.quantity<<" |";
+	out<<setw(14)<<right<<S.unit_price<<" |";
+	out<<setw(15)<<right<<S.total<<" |";
+
 	return out;
 }
 
-bool ascend(const goods a, const goods b, const int k=1){
+bool ascend(const goods &a, const goods &b, const int &k){
 	switch(k){
 		case 2:
+			// if(a.name==b.name) return a.dt<b.dt;
 			return a.name<b.name;
 		case 3:
 			return a.type<b.type;
@@ -122,7 +154,7 @@ bool ascend(const goods a, const goods b, const int k=1){
 	}
 }
 
-bool descend(const goods a, const goods b, const int k=1){
+bool descend(const goods &a, const goods &b, const int &k){
 	switch(k){
 		case 2:
 			return a.name>b.name;

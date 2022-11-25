@@ -88,18 +88,6 @@ date &date::operator ++(){
     return *this;
 }
 
-istream &inpDT(istream &in, date &dt){
-	in>>dt.day;
-	in>>dt.month;
-	in>>dt.year;
-	return in;
-}
-
-ostream &outDT(ostream &out, const date &dt){
-	out<<dt.day<<endl<<dt.month<<endl<<dt.year<<endl;
-	return out;
-}
-
 istream &operator >>(istream &in, date &dt){
 	cout<<"\tNgay: "; in>>dt.day;
 	cout<<"\tThang: "; in>>dt.month;
@@ -108,6 +96,6 @@ istream &operator >>(istream &in, date &dt){
 }
 
 ostream &operator <<(ostream &out, const date &dt){
-	out<<setfill('0')<<setw(2)<<dt.day<<"/"<<setw(2)<<dt.month<<"/"<<setw(4)<<dt.year<<setfill(' ');
+	out<<setfill('0')<<setw(2)<<right<<dt.day<<"/"<<setw(2)<<right<<dt.month<<"/"<<setw(4)<<right<<dt.year<<setfill(' ');
 	return out;
 }

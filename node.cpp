@@ -26,3 +26,10 @@ template<typename T>
 node<T>::~node(){
 
 }
+
+class goods;
+bool ascend(const goods &a, const goods &b, const int &k=1);
+bool descend(const goods &a, const goods &b, const int &k=1);
+class bill;
+bool ascend(const bill &a, const bill &b, const int &k=1);
+bool descend(const bill &a, const bill &b, const int &k=1);

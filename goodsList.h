@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 #include "linkedList.cpp"
 #include "goods.cpp"
-
+int main();
 class bill;
 class billList;
 
@@ -16,15 +16,16 @@ class goodsList: public linkedList<goods>{
         goodsList();
         goodsList(const goodsList &gL);
         virtual ~goodsList();
-        void show();
-        int numOfSup();
-        bool reduce(const node<goods> &S);
-        int Search(const node<goods> &S) const;
-        void Sort(int order, int t);
-        friend std::istream &operator >>(std::istream &in, goodsList &L);
-        friend std::ostream &operator <<(std::ostream &out, const goodsList &L);
-		friend bool ascend(const goods a, const goods b, const int k);
-		friend bool descend(const goods a, const goods b, const int k);
+        void show() const; //in ra man hinh
+        void print() const; //in file hh
+        void nhap(goods &S); //nhap hh vao kho
+        void xuat(goods &S); //xuat hh tu kho
+        void reduce(const goods &S); //giam hh trong kho
+        void Search(const int &att) const; //tim kiem
+        goodsList &operator =(goodsList gL);
+        friend std::istream &operator >>(std::istream &in, goodsList &gL); //nhap tu db
+        friend std::ostream &operator <<(std::ostream &out, const goodsList &gL); //in ra db
+        friend int main();
 };
 
 #endif

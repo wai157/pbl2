@@ -20,8 +20,6 @@ class date{
 		bool operator >=(const date &dt) const;
 		bool operator ==(const date &dt) const;
 		date &operator ++();
-		friend std::istream &inpDT(std::istream &in, date &dt);
-		friend std::ostream &outDT(std::ostream &out, const date &dt);
 		friend std::istream &operator >>(std::istream &in, date &dt);
 		friend std::ostream &operator <<(std::ostream &out, const date &dt);
 };
