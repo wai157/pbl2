@@ -14,6 +14,16 @@ linkedList<T>::~linkedList(){
 }
 
 template<typename T>
+bool linkedList<T>::isEmpty() const{
+    return (this->Head==NULL);
+}
+
+template<typename T>
+int linkedList<T>::numOfNode() const{
+    return this->n;
+}
+
+template<typename T>
 void linkedList<T>::insertHead(const T &data){
     this->n++;
     node<T> *newNode = new node<T>(data);

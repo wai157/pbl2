@@ -12,6 +12,8 @@ class linkedList{
     public:
         linkedList();
         virtual ~linkedList();
+        bool isEmpty() const;
+        int numOfNode() const;
         void insertHead(const T &data);
         void insertAfter(node<T> *prevNode,const T &data);
         void insertTail(const T &data);

@@ -57,6 +57,10 @@ bool goods::isValid() const{
 			this->quantity>0 && this->unit_price>0);
 }
 
+date goods::DT() const{
+	return this->dt;
+}
+
 void goods::setDT(const date &dt){
 	this->dt = dt;
 }
@@ -108,19 +112,21 @@ istream &operator >>(istream &in, goods &S){
 	cout<<"\tNhap so luong: "; in>>S.quantity; in.ignore();
 	cout<<"\tNhap don gia: "; in>>S.unit_price; in.ignore();
 	S.total = S.quantity * S.unit_price;
+	
 	return in;
 }
 
 ostream &operator <<(ostream &out, const goods &S){
-	out<<"\tMa hang hoa: "<<S.code<<endl;
-	out<<"\tTen hang hoa: "<<S.name<<endl;
-	out<<"\tLoai hang hoa: "<<S.type<<endl;
-	out<<"\tDon vi tinh: "<<S.unit<<endl;
-	out<<"\tNgay nhap hang: "<<S.dt<<endl;
-	out<<"\tNha san xuat: "<<S.producer<<endl;
-	out<<"\tSo luong: "<<S.quantity<<endl;
-	out<<"\tDon gia: "<<S.unit_price<<endl;
-	out<<"\tThanh tien: "<<S.total<<endl;
+	out<<setw(12)<<left<<S.code<<"| ";
+	out<<setw(23)<<left<<S.name<<"| ";
+	out<<setw(14)<<left<<S.type<<"| ";
+	out<<setw(19)<<left<<S.producer<<"| ";
+	out<<"     "<<S.dt<<"| ";
+	out<<setw(12)<<left<<S.unit<<"|";
+	out<<setw(9)<<right<<S.quantity<<" |";
+	out<<setw(14)<<right<<S.unit_price<<" |";
+	out<<setw(15)<<right<<S.total<<" |";
+
 	return out;
 }
 

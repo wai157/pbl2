@@ -28,18 +28,21 @@ class goods{
 		goods(const string &str);
 		~goods();
 		bool isValid() const;
+		date DT() const;
 		void setDT(const date &dt);
 		goods operator +(int q);
 		goods operator -(int q);
 		goods &operator =(const goods &S);
 		bool operator ==(goods S) const;
 		bool operator !=(goods S) const;
-		friend std::istream &operator >>(std::istream &in, goods &S);
-		friend std::ostream &operator <<(std::ostream &out, const goods &S);
-		friend std::istream &operator >>(std::istream &in, goodsList &gL);
-		friend std::ostream &operator <<(std::ostream &out, const goodsList &L);
+		friend std::istream &operator >>(std::istream &in, goods &S); //nhap tu ban phim
+		friend std::ostream &operator <<(std::ostream &out, const goods &S); //in ra file, man hinh
 		friend bool ascend(const goods &a, const goods &b, const int &k);
 		friend bool descend(const goods &a, const goods &b, const int &k);
+
+		//cua goodList
+		friend std::istream &operator >>(std::istream &in, goodsList &gL);
+		friend std::ostream &operator <<(std::ostream &out, const goodsList &L);
 };
 
 #endif
