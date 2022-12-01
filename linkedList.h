@@ -12,6 +12,7 @@ class linkedList{
     public:
         linkedList();
         virtual ~linkedList();
+        virtual void show() const =0;
         bool isEmpty() const;
         int numOfNode() const;
         void insertHead(const T &data);
