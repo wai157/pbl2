@@ -62,6 +62,11 @@ date bill::ngayNhapXuat_() const{
 }
 
 void bill::add(const goods &S){
+    node<goods> *tmp = this->gL.Head;
+    while(tmp!=NULL){
+        if(tmp->data.code==S.code) throw("\nHang hoa nhap vao khong hop le (hang hoa da duoc nhap trong phieu)!\n");
+        tmp = tmp->next;
+    }
     this->gL.insertTail(S);
 }
 
@@ -119,6 +124,22 @@ ostream &operator <<(ostream &out, const bill &b){
     out<<setw(14)<<right<<b.total<<" |";
 
     return out;
+}
+
+//cua goodsList;
+void goodsList::addBill(const bill &b){
+    node<goods> *tmp = b.gL.Head;
+    while(tmp!=NULL){
+        this->insertTail(tmp->data);
+        tmp = tmp->next;
+    }
+}
+void goodsList::subBill(const bill &b){
+    node<goods> *tmp = b.gL.Head;
+    while(tmp!=NULL){
+        this->reduce(tmp->data);
+        tmp = tmp->next;
+    }
 }
 
 bool ascend(const bill &a, const bill &b, const int &k){

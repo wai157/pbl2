@@ -23,10 +23,10 @@ goodsList::~goodsList(){
 }
 
 void goodsList::show() const{
-    if(this->Head==NULL) throw("Kho trong\n");
+    if(this->Head==NULL) throw("\nKho trong\n");
     else{
-        cout<<"So luong mat hang: "<<this->numOfNode()<<endl;
-        cout<<"| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Ngay nhap hang |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |"<<endl;
+        cout<<"So luong mat hang: \u001b[32;1m"<<this->n<<"\u001b[0m\n";
+        cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Ngay nhap hang |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |\u001b[0m"<<endl;
         int stt=0;
         node<goods> *tmp = this->Head;
         while(tmp!=NULL){
@@ -56,10 +56,10 @@ void goodsList::print() const{
 
 void goodsList::nhap(goods &S){
     cin>>S;
-    if(!S.isValid()) throw(1);
+    if(!S.isValid()) throw("\nHang hoa nhap vao khong hop le (so luong hoac don gia be hon hoac bang 0)!\n");
     node<goods> *tmp = this->Head;
     while(tmp!=NULL){
-        if(tmp->data.code==S.code) throw(2);
+        if(tmp->data.code==S.code) throw("\nHang hoa nhap vao khong hop le (ma hang hoa trung voi hang hoa co san trong kho)!\n");
         tmp = tmp->next;
     }
 }
@@ -69,7 +69,7 @@ void goodsList::xuat(goods &S){
     while(tmp!=NULL && tmp->data.code!=S.code){
         tmp = tmp->next;
     }
-    if(tmp==NULL) throw(1);
+    if(tmp==NULL) throw("\nKhong the xuat hang hoa (khong tim thay hang hoa tuong ung trong kho)!\n");
     else{
         S = tmp->data;
         cout<<"\tTen hang hoa: "<<S.name<<endl;
@@ -83,7 +83,7 @@ void goodsList::xuat(goods &S){
         cout<<"\tNhap don gia can xuat: "; cin>>S.unit_price; cin.ignore();
         S.total = S.quantity*S.unit_price;
     }
-    if(!S.isValid()) throw(3);
+    if(!S.isValid()) throw("\nHang hoa nhap vao khong hop le (so luong hoac don gia can xuat be hon hoac bang 0)!\n");
 }
 
 void goodsList::reduce(const goods &S){
@@ -92,7 +92,7 @@ void goodsList::reduce(const goods &S){
         tmp = tmp->next;
     }
     if(tmp->data.quantity<S.quantity){
-        throw(4);
+        throw("\nKhong the xuat hang hoa (so luong can xuat lon hon so luong hang hoa trong kho)!\n");
     }
     tmp->data = tmp->data - S.quantity;
     if(tmp->data.quantity==0) del(tmp);
@@ -106,8 +106,8 @@ void goodsList::Search(const int &att) const{
         cout<<"\nNhap ma hang hoa can tim: ";
         getline(cin, str);
         while(tmp!=NULL && tmp->data.code!=str) tmp = tmp->next;
-        cout<<"\nTim thay "<<((tmp!=NULL)?"1 ":"0 ")<<"mat hang!\n"<<endl;
-        cout<<"| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Ngay nhap hang |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |"<<endl;
+        cout<<"\nTim thay \u001b[32;1m"<<((tmp!=NULL)?"1":"0")<<"\u001b[0m mat hang!\n"<<endl;
+        cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Ngay nhap hang |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |\u001b[0m"<<endl;
         if(tmp!=NULL) cout<<"|   1 | "<<tmp->data;
         cout<<endl;
         return;
@@ -173,8 +173,8 @@ void goodsList::Search(const int &att) const{
         }
         tmp = tmp->next;
     }
-    cout<<"\nTim thay "<<res.numOfNode()<<" mat hang!\n"<<endl;
-    cout<<"| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Ngay nhap hang |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |"<<endl;
+    cout<<"\nTim thay \u001b[32;1m"<<res.numOfNode()<<"\u001b[0m mat hang!\n"<<endl;
+    cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Ngay nhap hang |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |\u001b[0m"<<endl;
     int stt=0;
     node<goods> *finalRes = res.Head;
     while(finalRes!=NULL){

@@ -29,7 +29,9 @@ class bill{
         friend std::ostream &operator <<(std::ostream &out, const bill &b);
         friend bool ascend(const bill &a, const bill &b, const int &k);
 		friend bool descend(const bill &a, const bill &b, const int &k);
-        
+        //cua goodsList
+        friend void goodsList::addBill(const bill &b);
+        friend void goodsList::subBill(const bill &b);
         //cua billList
         friend std::istream &operator >>(std::istream &in, billList &bL); 
         friend std::ostream &operator <<(std::ostream &out, const billList &bL);

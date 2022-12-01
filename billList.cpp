@@ -28,12 +28,12 @@ void billList::create(bill &b) const{
     cout<<"Nhap ten nguoi tao: "; getline(cin, b.nguoiTao);
     cout<<"Nhap ngay "<<((b.nhapXuat)?"nhap ":"xuat ")<<":\n"; cin>>b.ngayNhapXuat; cin.ignore();
     if(!b.ngayNhapXuat.isValid()){
-        throw(1);
+        throw("\nKhong the tao phieu (ngay thang nam khong hop le)!\n");
     }
     cout<<"Nhap ma phieu: "; getline(cin, b.code);
     node<bill> *tmp = this->Head;
     while(tmp!=NULL){
-        if(tmp->data.code==b.code) throw(2);
+        if(tmp->data.code==b.code) throw("\nKhong the tao phieu (phieu da duoc tao truoc)!\n");
         tmp = tmp->next;
     }
     b.fileName = b.fileName + b.ngayNhapXuat.dtAsString() + "_";
@@ -42,10 +42,11 @@ void billList::create(bill &b) const{
 }
 
 void billList::show() const{
-    if(this->Head==NULL) throw("Chua co phieu duoc tao!\n");
+    if(this->Head==NULL) throw("\nChua co phieu duoc tao!\n");
     node<bill> *tmp = this->Head;
     int stt=0;
-    cout<<"| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((tmp->data.nhapXuat)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |"<<endl;
+    cout<<"So luong phieu: \u001b[32;1m"<<this->n<<"\u001b[0m\n";
+    cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((tmp->data.nhapXuat)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |\u001b[0m"<<endl;
     while(tmp!=NULL){
         cout<<"|"<<setw(4)<<right<<++stt<<" | ";
         cout<<tmp->data<<endl;
@@ -78,8 +79,8 @@ void billList::history(const date &start, const date &end) const{
     node<bill> *tmp = tmpBL.Head;
     while(tmp!=NULL){
         if(tmp->data.ngayNhapXuat>=start && tmp->data.ngayNhapXuat<=end){
-            cout<<"Ngay "<<tmp->data.ngayNhapXuat<<":\n";
-            cout<<"| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |"<<endl;
+            cout<<"\n\u001b[40;1mNgay "<<tmp->data.ngayNhapXuat<<":\u001b[0m\n";
+            cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |\u001b[0m"<<endl;
             node<goods> *tmpSL = tmp->data.gL.Head;
             int stt=0;
             while(tmpSL!=NULL){
@@ -107,8 +108,8 @@ void billList::Search(const int &nx, const int &att) const{
         cout<<"Nhap ma phieu can tim: ";
         getline(cin, str);
         while(tmp!=NULL && tmp->data.code!=str) tmp = tmp->next;
-        cout<<"\nTim thay "<<((tmp!=NULL)?"1 ":"0 ")<<"phieu!\n"<<endl;
-        cout<<"| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |"<<endl;
+        cout<<"\nTim thay \u001b[32;1m"<<((tmp!=NULL)?"1 ":"0 ")<<"\u001b[0mphieu!\n"<<endl;
+        cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |\u001b[0m"<<endl;
         if(tmp!=NULL) cout<<"|   1 | "<<tmp->data;
         cout<<endl;
         return;
@@ -174,8 +175,8 @@ void billList::Search(const int &nx, const int &att) const{
         }
         tmp = tmp->next;
     }
-    cout<<"\nTim thay "<<res.numOfNode()<<" phieu!\n"<<endl;
-    cout<<"| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |"<<endl;
+    cout<<"\nTim thay \u001b[32;1m"<<res.numOfNode()<<"\u001b[0m phieu!\n"<<endl;
+    cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |\u001b[0m"<<endl;
     int stt=0;
     node<bill> *finalRes = res.Head;
     while(finalRes!=NULL){

@@ -20,6 +20,8 @@ class goodsList: public linkedList<goods>{
         void print() const; //in file hh
         void nhap(goods &S); //nhap hh vao kho
         void xuat(goods &S); //xuat hh tu kho
+        void addBill(const bill &b); //nhap hh dua vao bill
+        void subBill(const bill &b); //xuat hh dua vao bill
         void reduce(const goods &S); //giam hh trong kho
         void Search(const int &att) const; //tim kiem
         goodsList &operator =(goodsList gL);
