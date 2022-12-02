@@ -121,7 +121,7 @@ ostream &operator <<(ostream &out, const goods &S){
 	out<<setw(23)<<left<<S.name<<"| ";
 	out<<setw(14)<<left<<S.type<<"| ";
 	out<<setw(19)<<left<<S.producer<<"| ";
-	out<<"     "<<S.dt<<"| ";
+	out<<"    "<<S.dt<<" | ";
 	out<<setw(12)<<left<<S.unit<<"|";
 	out<<setw(9)<<right<<S.quantity<<" |";
 	out<<setw(14)<<right<<S.unit_price<<" |";

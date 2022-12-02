@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include "linkedList.cpp"
+#include "List.cpp"
 #include "goods.cpp"
 int main();
 class bill;
@@ -8,7 +8,7 @@ class billList;
 #ifndef goodsList_h
 #define goodsList_h
 
-class goodsList: public linkedList<goods>{
+class goodsList: public List<goods>{
     private:
         friend class bill;
         friend class billList;
@@ -16,7 +16,7 @@ class goodsList: public linkedList<goods>{
         goodsList();
         goodsList(const goodsList &gL);
         virtual ~goodsList();
-        void show() const; //in ra man hinh
+        virtual void show() const; //in ra man hinh
         void print() const; //in file hh
         void nhap(goods &S); //nhap hh vao kho
         void xuat(goods &S); //xuat hh tu kho
@@ -27,7 +27,6 @@ class goodsList: public linkedList<goods>{
         goodsList &operator =(goodsList gL);
         friend std::istream &operator >>(std::istream &in, goodsList &gL); //nhap tu db
         friend std::ostream &operator <<(std::ostream &out, const goodsList &gL); //in ra db
-        friend int main();
 };
 
 #endif
