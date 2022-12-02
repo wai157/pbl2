@@ -1,5 +1,0 @@
-banh001,banh gao,banh keo,hop,20221120,A,100,10000,1000000,
-keo001,keo cao su,banh keo,lo,20221120,B,200,15000,3000000,
-tl001,tu lanh,gia dung,cai,20221223,panasonic,5,5000000,25000000,
-ml001,may lanh,gia dung,cai,20221120,panasonic,20,8000000,160000000,
-tv001,tivi,dien tu,cai,20221220,panasonic,10,20000000,200000000,
