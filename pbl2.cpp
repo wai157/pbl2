@@ -164,8 +164,8 @@ void pbl2::menu(){
 		cout<<"+---------------------\u001b[37;1mMENU PHIEU\u001b[0m---------------------+\n";
 		cout<<"| 1. Tao phieu nhap hang hoa (nhap hang hoa).        |\n";
 		cout<<"| 2. Tao phieu xuat hang hoa (xuat hang hoa).        |\n";
-		cout<<"| 3. Sap xep danh sach phieu xuat.                   |\n";
-		cout<<"| 4. Sap xep danh sach phieu nhap.                   |\n";
+		cout<<"| 3. Sap xep danh sach phieu nhap.                   |\n";
+		cout<<"| 4. Sap xep danh sach phieu xuat.                   |\n";
 		cout<<"| 5. Hien thi danh sach phieu nhap kho.              |\n";
 		cout<<"| 6. Hien thi danh sach phieu xuat kho.              |\n";
 		cout<<"| 7. Tim kiem phieu nhap kho.                        |\n";
@@ -333,7 +333,7 @@ bool pbl2::option4(){
 	int ch1=0, ch2=0;
 	cout<<"Chon thuoc tinh sap xep\n";
 	cout<<"(1: ma phieu\n2: nguoi tao\n3: ngay tao\n";
-	cout<<"4: ngay nhap xuat\n5: so mat hang\n6: tong gia tien\n"; cin>>ch1;
+	cout<<"4: ngay nhap xuat\n5: so mat hang\n6: tong gia tien): "; cin>>ch1;
 	cout<<"Chon thu tu sap xep\n";
 	cout<<"(1: tang dan\n2: giam dan): "; cin>>ch2;
 	phieuNhap.Sort(ch2, ch1);
@@ -349,7 +349,7 @@ bool pbl2::option5(){
 	int ch1=0, ch2=0;
 	cout<<"Chon thuoc tinh sap xep\n";
 	cout<<"(1: ma phieu\n2: nguoi tao\n3: ngay tao\n";
-	cout<<"4: ngay nhap xuat\n5: so mat hang\n6: tong gia tien\n"; cin>>ch1;
+	cout<<"4: ngay nhap xuat\n5: so mat hang\n6: tong gia tien): "; cin>>ch1;
 	cout<<"Chon thu tu sap xep\n";
 	cout<<"(1: tang dan\n2: giam dan): "; cin>>ch2;
 	phieuXuat.Sort(ch2, ch1);

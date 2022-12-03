@@ -3,7 +3,6 @@
 using namespace std;
 
 int main(){
-    int x, *ptr=&x;
-    *ptr=1;
-    
+    int x=0, y=2, &rx=y;
+    int *ptr = &rx;
 }

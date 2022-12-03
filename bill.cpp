@@ -78,9 +78,10 @@ void bill::print(){
     billout<<"\t\t\tNgay "<<((this->nhapXuat)?"nhap":"xuat")<<": "<<this->ngayNhapXuat<<endl;
     billout<<"Nguoi tao: "<<this->nguoiTao<<endl;
     ngayTao = curDate();
-    billout<< "Ngay tao: " << this->ngayTao<<endl;
-    billout<<setfill('_')<<setw(141)<<"_"<<endl;
+    billout<< "Ngay tao: " << this->ngayTao<<"\n\n";
+    billout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(14)<<"+"<<setw(25)<<"+"<<setw(16)<<"+"<<setw(21)<<"+"<<setw(14)<<"+"<<setw(11)<<"+"<<setw(16)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
     billout<<setfill(' ')<<"| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |"<<endl;
+    billout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(14)<<"+"<<setw(25)<<"+"<<setw(16)<<"+"<<setw(21)<<"+"<<setw(14)<<"+"<<setw(11)<<"+"<<setw(16)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
     int stt=0;
     node<goods> *tmp = this->gL.Head;
     while(tmp!=NULL){
@@ -96,10 +97,9 @@ void bill::print(){
         billout<<setw(15)<<right<<tmp->data.total<<" |"<<endl;
         tmp=tmp->next;
     }
-    billout<<setfill('_')<<setw(141)<<"_"<<endl;
+    billout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(14)<<"+"<<setw(25)<<"+"<<setw(16)<<"+"<<setw(21)<<"+"<<setw(14)<<"+"<<setw(11)<<"+"<<setw(16)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
     billout<<setfill(' ')<<"|"<<setw(63)<<"Cong"<<setw(60)<<"|"<<setw(15)<<right<<this->total<<" |"<<endl;
-    billout<<setfill('_')<<setw(141)<<"_"<<endl;
-    billout<<setfill(' ');
+    billout<<setfill('-')<<"+"<<setw(123)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
     billout.close();
 }
 

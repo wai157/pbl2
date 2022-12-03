@@ -66,15 +66,16 @@ void billList::print(const int &nx) const{
     str += ".txt";
     dsphieu.open(str, ofstream::out);
     dsphieu<<"DANH SACH PHIEU "<<((nx)?"NHAP ":"XUAT ")<<endl;
-    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
+    dsphieu<<"So luong phieu: "<<this->numOfNode()<<"\n\n";
+    dsphieu<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     dsphieu<<"| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |"<<endl;
-    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
+    dsphieu<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     while(tmp!=NULL){
         dsphieu<<"|"<<setw(4)<<right<<++stt<<" | ";
         dsphieu<<tmp->data<<endl;
         tmp = tmp->next;
     }
-    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
+    dsphieu<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
 }
 
 void billList::history(const date &start, const date &end) const{
