@@ -46,12 +46,15 @@ void billList::show() const{
     node<bill> *tmp = this->Head;
     int stt=0;
     cout<<"So luong phieu: \u001b[32;1m"<<this->n<<"\u001b[0m\n";
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((tmp->data.nhapXuat)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |\u001b[0m"<<endl;
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     while(tmp!=NULL){
         cout<<"|"<<setw(4)<<right<<++stt<<" | ";
         cout<<tmp->data<<endl;
         tmp = tmp->next;
     }
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
 }
 
 void billList::print(const int &nx) const{
@@ -62,25 +65,28 @@ void billList::print(const int &nx) const{
     str += ((nx)?"nhap":"xuat");
     str += ".txt";
     dsphieu.open(str, ofstream::out);
-    dsphieu<<setw(50)<<"DANH SACH PHIEU "<<((nx)?"NHAP ":"XUAT ")<<endl;
-    dsphieu<<setfill('_')<<setw(106)<<'_'<<setfill(' ')<<endl;
+    dsphieu<<"DANH SACH PHIEU "<<((nx)?"NHAP ":"XUAT ")<<endl;
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     dsphieu<<"| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |"<<endl;
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     while(tmp!=NULL){
         dsphieu<<"|"<<setw(4)<<right<<++stt<<" | ";
         dsphieu<<tmp->data<<endl;
         tmp = tmp->next;
     }
-    dsphieu<<setfill('_')<<setw(106)<<'_'<<setfill(' ')<<endl;
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
 }
 
 void billList::history(const date &start, const date &end) const{
     billList tmpBL(*this);
-    tmpBL.Sort(1,3);
+    tmpBL.Sort(1,4);
     node<bill> *tmp = tmpBL.Head;
     while(tmp!=NULL){
         if(tmp->data.ngayNhapXuat>=start && tmp->data.ngayNhapXuat<=end){
             cout<<"\n\u001b[40;1mNgay "<<tmp->data.ngayNhapXuat<<":\u001b[0m\n";
+            cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(14)<<"+"<<setw(25)<<"+"<<setw(16)<<"+"<<setw(21)<<"+"<<setw(14)<<"+"<<setw(11)<<"+"<<setw(16)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
             cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma hang hoa |"<<"      Ten hang hoa      |"<<" Loai hang hoa |"<<"    Nha san xuat    |"<<" Don vi tinh |"<<" So luong |"<<"    Don gia    |"<<"   Thanh tien   |\u001b[0m"<<endl;
+            cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(14)<<"+"<<setw(25)<<"+"<<setw(16)<<"+"<<setw(21)<<"+"<<setw(14)<<"+"<<setw(11)<<"+"<<setw(16)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
             node<goods> *tmpSL = tmp->data.gL.Head;
             int stt=0;
             while(tmpSL!=NULL){
@@ -95,6 +101,7 @@ void billList::history(const date &start, const date &end) const{
                 cout<<setw(15)<<right<<tmpSL->data.total<<" |"<<endl;
                 tmpSL=tmpSL->next;
             }
+            cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(14)<<"+"<<setw(25)<<"+"<<setw(16)<<"+"<<setw(21)<<"+"<<setw(14)<<"+"<<setw(11)<<"+"<<setw(16)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
         }
         tmp = tmp->next;
     }
@@ -109,9 +116,11 @@ void billList::Search(const int &nx, const int &att) const{
         getline(cin, str);
         while(tmp!=NULL && tmp->data.code!=str) tmp = tmp->next;
         cout<<"\nTim thay \u001b[32;1m"<<((tmp!=NULL)?"1 ":"0 ")<<"\u001b[0mphieu!\n"<<endl;
+        cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
         cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |\u001b[0m"<<endl;
-        if(tmp!=NULL) cout<<"|   1 | "<<tmp->data;
-        cout<<endl;
+        cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
+        if(tmp!=NULL) cout<<"|   1 | "<<tmp->data<<endl;
+        cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
         return;
     }
     //tim theo filter
@@ -176,7 +185,9 @@ void billList::Search(const int &nx, const int &att) const{
         tmp = tmp->next;
     }
     cout<<"\nTim thay \u001b[32;1m"<<res.numOfNode()<<"\u001b[0m phieu!\n"<<endl;
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     cout<<"\u001b[47m\u001b[30;1m| STT |"<<" Ma phieu |"<<"         Nguoi Tao         |"<<"  Ngay tao  |"<<" Ngay "<<((nx)?"nhap ":"xuat ")<<"hang |"<<" So mat hang |"<<" Tong gia tien |\u001b[0m"<<endl;
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
     int stt=0;
     node<bill> *finalRes = res.Head;
     while(finalRes!=NULL){
@@ -184,6 +195,7 @@ void billList::Search(const int &nx, const int &att) const{
         cout<<finalRes->data<<endl;
         finalRes = finalRes->next;
     }
+    cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(11)<<"+"<<setw(28)<<"+"<<setw(13)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(16)<<"+"<<setfill(' ')<<endl;
 }
 
 istream &operator >>(std::istream &in, billList &bL){
