@@ -310,7 +310,7 @@ bool pbl2::option2(){
 
 bool pbl2::option3(){
 	if(khoNhap.isEmpty()){
-		cout<<"Kho trong!\n";
+		cout<<"\u001b[31mKho trong!\u001b[0m\n";
 		return false;
 	}
 	int ch1=0, ch2=0;
@@ -327,7 +327,7 @@ bool pbl2::option3(){
 
 bool pbl2::option4(){
 	if(phieuNhap.isEmpty()){
-		cout<<"Chua co phieu duoc tao!\n";
+		cout<<"\u001b[31mChua co phieu duoc tao!\u001b[0m\n";
 		return false;
 	}
 	int ch1=0, ch2=0;
@@ -343,7 +343,7 @@ bool pbl2::option4(){
 
 bool pbl2::option5(){
 	if(phieuXuat.isEmpty()){
-		cout<<"Chua co phieu duoc tao!\n";
+		cout<<"\u001b[31mChua co phieu duoc tao!\u001b[0m\n";
 		return false;
 	}
 	int ch1=0, ch2=0;
@@ -358,11 +358,7 @@ bool pbl2::option5(){
 }
 
 bool pbl2::option6(){
-	try{
-		khoNhap.show();
-	} catch(const char *errt){
-		cerr<<"\u001b[31m"<<errt<<"\u001b[0m";
-	}
+	khoNhap.show();
 	return true;
 }
 
@@ -400,20 +396,12 @@ bool pbl2::option7(){
 }
 
 bool pbl2::option8(){
-	try{
-		phieuNhap.show();
-	} catch(const char *errt){
-		cerr<<"\u001b[31m"<<errt<<"\u001b[0m";
-	}
+	phieuNhap.show();
 	return true;
 }
 
 bool pbl2::option9(){
-	try{
-		phieuXuat.show();
-	} catch(const char *errt){
-		cerr<<"\u001b[31m"<<errt<<"\u001b[0m";
-	}
+	phieuXuat.show();
 	return true;
 }
 

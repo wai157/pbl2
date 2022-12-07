@@ -21,9 +21,9 @@ class List{
         void del(node<T> *delNode);
         void Sort(const int &order=1, const int &att=1);
         template<typename U>
-        friend int partition(node<U> *L, int l, int h, bool compFunc(const U&, const U&, const int&), int t);
+        friend int partition(node<U> *first, node<U> *last, bool compFunc(const U&, const U&, const int&), int t);
         template<typename U>
-        friend void qSort(node<U> *L, int l, int h, bool compFunc(const U&, const U&, const int&), int t);
+        friend void qSort(node<U> *first, node<U> *last, bool compFunc(const U&, const U&, const int&), int t);
 };
 
 #endif

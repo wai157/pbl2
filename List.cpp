@@ -79,42 +79,40 @@ void List<T>::del(node<T> *delNode){
 
 template<typename T>
 void List<T>::Sort(const int &order, const int &att){
-    node<T> *tmpArr = new node<T>[this->n];
-    int k=0;
-    node<T> *tmp = this->Head;
-    while(tmp!=NULL){
-        tmpArr[k++] = *tmp;
-        tmp = tmp->next;
+    node<T> *last = this->Head;
+    while(last!=NULL && last->next!=NULL){
+        last = last->next;
     }
-    if(order%2==1) qSort(tmpArr, 0, this->n-1, ascend, att);
-    else qSort(tmpArr, 0, this->n-1, descend, att);
-    tmp = this->Head;
-    k=0;
-    while(tmp!=NULL){
-        *tmp = tmpArr[k++];
-        tmp = tmp->next;
-    }
+    if(order%2==1) qSort(this->Head, last, ascend, att);
+    else qSort(this->Head, last, descend, att);
 }
 
 template<typename T>
-int partition(node<T> *L, int l, int h, bool compFunc(const T&,const T&, const int&), int k){
-    node<T> pivot = L[h];
-	int i=l-1;
-	for(int j=l;j<h;j++){
-		if(compFunc(L[j].data,pivot.data,k)){
-			i++;
-			swap(L[i].data,L[j].data);
-		}
-	}
-	swap(L[i+1].data,L[h].data);
-	return (i+1);
+node<T>* partition(node<T> *first, node<T> *last, bool compFunc(const T&,const T&, const int&), int k){
+    node<T> *pivot = first;
+    node<T> *front = first;
+    while(front!=NULL && front!=last){
+        if(compFunc(front->data,last->data,k)){
+            pivot = first;
+            swap(first->data, front->data);
+            first = first->next;
+        }
+        front = front->next;
+    }
+    swap(first->data, last->data);
+    return pivot;
 }
 
 template<typename T>
-void qSort(node<T> *L, int l, int h, bool compFunc(const T&, const T&, const int&), int k){
-    if(l<h){
-		int pi=partition(L,l,h,compFunc,k);
-		qSort(L,l,pi-1,compFunc,k);
-		qSort(L,pi+1,h,compFunc,k);
+void qSort(node<T> *first, node<T> *last, bool compFunc(const T&, const T&, const int&), int k){
+    if(first==last){
+        return;
+    }
+    node<T> *pivot = partition(first, last, compFunc, k);
+    if(pivot!=NULL && pivot->next!=NULL){
+		qSort(pivot->next,last,compFunc,k);
 	}
+    if(pivot!=NULL && first!=NULL){
+        qSort(first,pivot,compFunc,k);
+    }
 }

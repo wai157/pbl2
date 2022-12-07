@@ -1,13 +1,19 @@
 KHO HANG
-So luong mat hang: 6
+So luong mat hang: 12
 
 +-----+-------------+------------------------+---------------+--------------------+----------------+-------------+----------+---------------+----------------+
 | STT | Ma hang hoa |      Ten hang hoa      | Loai hang hoa |    Nha san xuat    | Ngay nhap hang | Don vi tinh | So luong |    Don gia    |   Thanh tien   |
 +-----+-------------+------------------------+---------------+--------------------+----------------+-------------+----------+---------------+----------------+
-|   1 | tv001       | tivi                   | dien tu       | panasonic          |     20/12/2022 | cai         |       10 |      20000000 |      200000000 |
-|   2 | ml001       | may lanh               | gia dung      | panasonic          |     20/11/2022 | cai         |       20 |       8000000 |      160000000 |
-|   3 | keo001      | keo cao su             | banh keo      | B                  |     20/11/2022 | lo          |      200 |         15000 |        3000000 |
-|   4 | banh001     | banh gao               | banh keo      | A                  |     20/11/2022 | hop         |      100 |         10000 |        1000000 |
-|   5 | tl003       | tu lanh                | gia dung      | samsung            |     20/02/2023 | cai         |       10 |      10000000 |      100000000 |
-|   6 | tv03        | tivi                   | dien tu       | LG                 |     20/12/2022 | cai         |       10 |      15000000 |      150000000 |
+|   1 | bhn01       | bep hong ngoai         | gia dung      | Hommy              |     20/12/2022 | cai         |       10 |        600000 |        6000000 |
+|   2 | nckd01      | noi chien khong dau    | gia dung      | Kangaroo           |     20/12/2022 | cai         |       10 |       1500000 |       15000000 |
+|   3 | tl05        | tu lanh                | gia dung      | Aqua               |     22/11/2022 | cai         |        5 |       4000000 |       40000000 |
+|   4 | tl04        | tu lanh                | gia dung      | Toshiba            |     22/11/2022 | cai         |       10 |       5000000 |       50000000 |
+|   5 | lt01        | laptop                 | dien tu       | Acer               |     03/12/2022 | cai         |       10 |       5000000 |       50000000 |
+|   6 | tl03        | tu lanh                | gia dung      | Samsung            |     22/11/2022 | cai         |        5 |       7000000 |       70000000 |
+|   7 | tl01        | tu lanh                | gia dung      | LG                 |     20/11/2022 | cai         |       10 |       8000000 |       80000000 |
+|   8 | tl02        | tu lanh                | gia dung      | Panasonic          |     20/11/2022 | cai         |       10 |       9000000 |       90000000 |
+|   9 | lt03        | laptop                 | dien tu       | Lenovo             |     03/12/2022 | cai         |       10 |      10000000 |      100000000 |
+|  10 | tv02        | tivi                   | dien tu       | Samsung            |     20/10/2022 | cai         |       10 |      12000000 |      120000000 |
+|  11 | tv01        | tivi                   | dien tu       | Samsung            |     20/10/2022 | cai         |       10 |      12000000 |      120000000 |
+|  12 | lt02        | laptop                 | dien tu       | Apple              |     03/12/2022 | cai         |        5 |      40000000 |      200000000 |
 +-----+-------------+------------------------+---------------+--------------------+----------------+-------------+----------+---------------+----------------+

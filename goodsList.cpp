@@ -23,7 +23,10 @@ goodsList::~goodsList(){
 }
 
 void goodsList::show() const{
-    if(this->Head==NULL) throw("\nKho trong\n");
+    if(this->Head==NULL){
+        cout<<"Kho trong!";
+        return;
+    }
     else{
         cout<<"So luong mat hang: \u001b[32;1m"<<this->n<<"\u001b[0m\n";
         cout<<setfill('-')<<"+"<<setw(6)<<"+"<<setw(14)<<"+"<<setw(25)<<"+"<<setw(16)<<"+"<<setw(21)<<"+"<<setw(17)<<"+"<<setw(14)<<"+"<<setw(11)<<"+"<<setw(16)<<"+"<<setw(17)<<"+"<<setfill(' ')<<endl;
@@ -84,10 +87,9 @@ void goodsList::checkXuat(goods &S){
         cout<<"\tSo luong: "<<S.quantity<<endl;
         cout<<"\tDon gia: "<<S.unit_price<<endl;
         cout<<"\tNhap so luong can xuat: "; cin>>S.quantity; cin.ignore();
-        cout<<"\tNhap don gia can xuat: "; cin>>S.unit_price; cin.ignore();
         S.total = S.quantity*S.unit_price;
     }
-    if(!S.isValid()) throw("\nHang hoa nhap vao khong hop le (so luong hoac don gia can xuat be hon hoac bang 0)!\n");
+    if(!S.isValid()) throw("\nHang hoa nhap vao khong hop le (so luong can xuat be hon hoac bang 0)!\n");
 }
 
 void goodsList::reduce(const goods &S){

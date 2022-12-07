@@ -42,7 +42,10 @@ void billList::create(bill &b) const{
 }
 
 void billList::show() const{
-    if(this->Head==NULL) throw("\nChua co phieu duoc tao!\n");
+    if(this->Head==NULL){
+        cout<<"Chua co phieu duoc tao!\n";
+        return;
+    }
     node<bill> *tmp = this->Head;
     int stt=0;
     cout<<"So luong phieu: \u001b[32;1m"<<this->n<<"\u001b[0m\n";
